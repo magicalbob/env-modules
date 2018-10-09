@@ -42,6 +42,6 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class machine_env_dev_proxy {
+class machine_box_01 {
   include env_nginx
 }

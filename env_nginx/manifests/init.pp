@@ -70,10 +70,11 @@ class env_nginx {
   $web_sites = lookup({ 'name' => 'web_sites', 'default_value' => {} })
   $web_sites.each | $web_site | {
     $server_name=$web_site[1][0]['server_name']
-    $key_file=lookup('key_pairs.itsshared',{})[0]['key_file']
-    $key=lookup('key_pairs.itsshared',{})[0]['key'].join("\n")
-    $crt_file=lookup('key_pairs.itsshared',{})[0]['crt_file']
-    $crt=lookup('key_pairs.itsshared',{})[0]['crt'].join("\n")
+    $key_pairs=lookup({ 'name' => 'key_pairs', 'default_value' => {} })
+    $key_file=$key_pairs[$web_site[1][0]['key_pair']][0]['key_file']
+    $key=$key_pairs[$web_site[1][0]['key_pair']][0]['key']
+    $crt_file=$key_pairs[$web_site[1][0]['key_pair']][0]['crt_file']
+    $crt=$key_pairs[$web_site[1][0]['key_pair']][0]['crt']
     $locations=$web_site[1][0]['locations'].join("\n")
 
     $web_config=[
